@@ -1,0 +1,18 @@
+{% extends 'menu.html' %}
+
+{% block pagename %}
+    <h1> Мои любимые игры </h1>
+{% endblock %}
+
+
+{% block content %}
+    <ul>
+        {% for g in games_list %}
+            <li class="item">
+                {{ g }} |{{g.description}}. Стоимость: {{g.price}} <button>Играть</button>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+

@@ -1,0 +1,18 @@
+{% extends 'menu.html' %}
+
+{% block pagename %}
+    <h1> Мои любимые книги </h1>
+{% endblock %}
+
+
+{% block content %}
+    <ul>
+        {% for book in books %}
+            <li class="item">
+                {{ book }} <button>Читать</button>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+

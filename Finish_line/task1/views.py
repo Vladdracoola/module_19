@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import ContactForm
 from .models import *
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -106,3 +107,17 @@ def sign_up_by_django(request):
         form = ContactForm()
     return render(request, 'registration_page.html',
                   {'form': form}, )
+
+
+def about_post(request):
+    items_per_page = int(request.GET.get('items_per_page', '3'))
+    posts = Post.objects.all().order_by('-created_at')
+    paginator = Paginator(posts, items_per_page)
+    page_number = request.GET.get('page')
+    page_posts = paginator.get_page(page_number)
+    return render(request, 'post.html', {
+        'page_posts': page_posts,
+        'current_items_per_page': items_per_page,
+        'available_items_per_page': ['3', '5', '10', '20'],
+    })
+

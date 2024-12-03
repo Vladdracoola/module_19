@@ -118,6 +118,6 @@ def about_post(request):
     return render(request, 'post.html', {
         'page_posts': page_posts,
         'current_items_per_page': items_per_page,
-        'available_items_per_page': ['3', '5', '10', '20'],
+        'available_items_per_page': [3, 5, 10, 20],
     })
 

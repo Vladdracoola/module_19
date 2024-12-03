@@ -7,7 +7,7 @@ class Buyer(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=128)
     balance = models.DecimalField(decimal_places=2, max_digits=99, default=0.00)
-    age = models.IntegerField()
+    age = models.PositiveIntegerField()
 
     def __str__(self):
         return self.name

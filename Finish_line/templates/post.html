@@ -6,22 +6,24 @@
 
 
 {% block content %}
-<h1>Свежие темы</h1>
+<h1></h1>
 <ul>
     {% for post in page_posts %}
-    <li>
-        {{ post.title }} ({{ post.created_at }})
-        <p>{{ post.content }}</p>
+    <li class="post-item">
+        <h2>{{ post.title }}</h2>
+        <p class="post-content">{{ post.content }}</p>
+        <span class="post-date">({{ post.created_at }})</span>
     </li>
     {% empty %}
     <p>Здесь скоро будут новости.</p>
     {% endfor %}
 </ul>
+
 <form method="get" class="items-per-page-form">
-    <label for="items-per-page">Новостей на странице:</label>
+    <label for="items-per-page" class="custom-label">Новостей на странице:</label>
     <select name="items_per_page" id="items-per-page" onchange="this.form.submit()">
         {% for value in available_items_per_page %}
-        <option value="{{ value }}" {% if value == current_items_per_page %}selected{% endif %}>{{ value }}</option>
+        <option class="option_page" value="{{ value }}" {% if value == current_items_per_page %}selected{% endif %}>{{ value }}</option>
         {% endfor %}
     </select>
 </form>
@@ -31,13 +33,13 @@
     <p>Страницы:</p>
     <ul>
         {% if page_posts.has_previous %}
-        <li><a href="?page=1">ПОЛНЫЙ НАЗАД</a></li>
-        <li><a href="?page={{ page_posts.previous_page_number }}">ОТХОДИМ</a></li>
+        <li><a href="?page=1">В будущее</a></li>
+        <li><a href="?page={{ page_posts.previous_page_number }}"><</a></li>
         {% endif %}
-        <li>{{ page_posts.number }}/{{ paginator.num_pages }}</li>
+        <li>{{ page_posts.number }}/{{ page_posts.paginator.num_pages }}</li>
         {% if page_posts.has_next %}
-        <li><a href="?page={{ page_posts.next_page_number }}">ШТУРМУЕМ</a></li>
-        <li><a href="?page={{ paginator.num_pages }}">ПОЛНЫЙ ВПЕРЁД</a></li>
+        <li><a href="?page={{ page_posts.next_page_number }}">В прошлое</a></li>
+        <li><a href="?page={{ paginator.num_pages }}">></a></li>
         {% endif %}
     </ul>
 </div>
